@@ -20,6 +20,50 @@ public class webScraper {
         return contents;
     }
     public static void main(String[] args) {
-        System.out.println(urltoString("http://erdani.com/tdpl/hamlet.txt"));
+        System.out.println("Paste URL here");
+        Scanner theurl = new Scanner(System.in);
+        String webaddress = theurl.next();
+        String web = urltoString(webaddress);
+        String[] webwords = web.split("\\s");
+        //count words
+        int count = 0;
+        for (int i = 0; i < webwords.length; i++) {
+            if (!(webwords[i].contains("\\s")) && !(webwords[i].contains("\\n")) && (webwords[i].length() > 0)) {
+                count++;
+
+            }
+
+        }
+        System.out.println("The total word count is " + count);
+        //find word
+        System.out.println("Search for a word on website by typing it in.");
+        Scanner findword = new Scanner(System.in);
+        String foundword = findword.next();
+        boolean found = false;
+        for (int i = 0; i < webwords.length; i++) {
+            if ((webwords[i].contains(foundword))) {
+                found = true;
+
+            }
+        }
+        System.out.println(found);
+        //find unique word count
+        System.out.println("Hit enter to see unique word count");
+        int newcount = 0;
+        for (int i = 0; i < webwords.length; i++) {
+            if ((webwords[i].length() > 0)) {
+                String[] solution = new String[count];
+                for (int j = 0; j < solution.length; j++){
+                    if (!(solution[j].contains(webwords[i]))) {
+                        solution[newcount++] =webwords[i];
+                    }
+                }
+
+            }
+
+        }
+        System.out.println("Number of Unique words is " + newcount);
+
     }
+
 }
